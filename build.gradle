@@ -1,0 +1,85 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin:'maven'
+apply plugin:'idea'
+apply plugin: 'org.akhikhl.gretty'
+
+//sourceSets{
+//    main{
+//        java{
+//            srcDir 'src/main/hllo'
+//        }
+//        resources {
+//            srcDir 'src/main/yy'
+//        }
+//    }
+//}
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
+    project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
+
+gretty{
+    httpPort = 7777
+    contextPath='/MyGradleWeb'
+    host='localhost'
+    httpEnabled = true //是否开启http协议
+    servletContainer = 'tomcat8'//开启服务器为tomcat 默认'jetty9'
+    //热部署时间扫描间隔时间 默认为一秒 这个其实可以不配 它帮你配置了
+    scanInterval = 1
+    fastReload =true //tomcat会每秒钟扫描检测，发现文件被修改就会立即被执行，没有被修改那就不管了
+    loggingLevel ='DEBUG'
+    consoleLogEnabled =true
+
+    debugPort = 8888
+    debugSuspend = true
+}
+
+//plugins {
+//    id 'java'
+//    id 'war'
+//}
+
+
+
+group 'org.NanQiao.gradle'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8 //源头多少
+targetCompatibility = 1.8//产物也是多少
+
+repositories {
+    mavenCentral()
+}
+//私服
+//dependencies{
+//    reppositories{
+//        maven{
+//            url:xxxxx
+//        }
+//    }
+//}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    implementation 'org.mybatis:mybatis:3.5.6'
+}
+
+//统一编码
+tasks.withType(JavaCompile){//设置java编译时的编码
+    options.encoding =  "UTF-8"
+}
+
+//生成时，生成javadoc 测试阶段把编码统一用UTF-8
+
+[compileJava,javadoc,compileTestJava]*.options*.encoding =  "UTF-8"
