@@ -22,7 +22,7 @@ public class Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("do get");
         int a = 10;
-ZZ        int b =30;
+        int b =30;
         int c =a+b;
         System.out.println(c);
         System.out.println(b);
