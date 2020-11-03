@@ -1,6 +1,6 @@
 package org.GradleWeb;
 //怎么搞 注释。。。。1
-
+//hello javaScript
 //想怎么搞就这么搞
 //搞不了 ，搞的了
 
