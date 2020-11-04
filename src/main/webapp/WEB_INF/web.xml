@@ -5,8 +5,10 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID"
          version="3.0"
           metadata-complete="false">
-
-
+  <servlet>
+    <servlet-name>Servlet</servlet-name>
+    <servlet-class>org.GradleWeb.Servlet</servlet-class>
+  </servlet>
 
 
   <welcome-file-list>
